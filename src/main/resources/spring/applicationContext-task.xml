@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+	
+	<!-- 扫描task包 -->
+<!--	<context:component-scan base-package="cn.xiaochi.task"/>-->
+	
+	<!-- 启用定时任务 -->
+<!--	<task:scheduled-tasks>-->
+<!--		&lt;!&ndash;  cron="10 */5 * * * ?  秒 分 时 日 月 星期(如果没要求，用问号 ?)-->
+<!--			       每分钟的10秒时执行，间隔5分钟执行-->
+<!--		 &ndash;&gt;-->
+<!--		<task:scheduled ref="BusinessTask" method="synNumber" cron="10 */5 * * * ?"/>-->
+<!--	</task:scheduled-tasks>-->
+</beans>

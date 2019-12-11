@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 配置数据源 -->
+    <context:property-placeholder location="classpath:database.properties"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 配置最大连接数 -->
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <!-- 最小空余数量 -->
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <!-- 最大活跃数量 -->
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <!-- 最长等待时间 -->
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+    </bean>
+
+    <!-- sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 加载 mybaties 配置 -->
+        <property name="configLocation" value="classpath:mybatisConfig.xml"/>
+        <!-- 注入数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 指定 mybaties sql文件 mapper 位置 -->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"/>
+        <!-- 实体类别名 -->
+        <property name="typeAliasesPackage" value="cn.xiaochi.bean"/>
+        <!-- pageHelper分页配置 -->
+        <property name="plugins">
+            <list>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <!-- 指定数据库类型 -->
+                            <prop key="helperDialect">mysql</prop>
+                        </props>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 扫描Dao接口包 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="cn.xiaochi.dao"/>
+    </bean>
+</beans>
