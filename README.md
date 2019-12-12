@@ -1,5 +1,7 @@
 # java-ssm-mmall
 
+商城：用到了支付宝支付、guava本地缓存(util/TokenCache.java)、讀取自定义properties文件(util/PropertiesUtil.java)、集合类工具、ftpclient上传到ftp服务器(util/FTPUtil.java)、mybatis-generator-core 反向生成java代码(util/generatorConfig.xml)、joda-time日期时间处理(util/DateTimeUtil.java)
+
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 
